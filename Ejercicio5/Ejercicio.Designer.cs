@@ -36,10 +36,10 @@
             this.validateTextBox1.Location = new System.Drawing.Point(84, 75);
             this.validateTextBox1.Multilinea = false;
             this.validateTextBox1.Name = "validateTextBox1";
-            this.validateTextBox1.Size = new System.Drawing.Size(248, 46);
+            this.validateTextBox1.Size = new System.Drawing.Size(248, 43);
             this.validateTextBox1.TabIndex = 0;
-            this.validateTextBox1.Texto = "";
-            this.validateTextBox1.Tipo = ValidateTextBox.ValidateTextBox.eTipo.Texto;
+            this.validateTextBox1.Texto = "  ";
+            this.validateTextBox1.Tipo = ValidateTextBox.ValidateTextBox.eTipo.Numerico;
             // 
             // Ejercicio
             // 
