@@ -33,9 +33,10 @@
             // 
             // textBox
             // 
+            this.textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBox.Location = new System.Drawing.Point(10, 10);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(100, 20);
+            this.textBox.Size = new System.Drawing.Size(100, 23);
             this.textBox.TabIndex = 0;
             // 
             // ValidateTextBox
@@ -44,6 +45,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBox);
             this.Name = "ValidateTextBox";
+            this.Size = new System.Drawing.Size(133, 72);
             this.ResumeLayout(false);
             this.PerformLayout();
 
