@@ -15,6 +15,16 @@ namespace ValidateTextBox
         public ValidateTextBox()
         {
             InitializeComponent();
+
+        }
+
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            this.Height = textBox.Height + 20;
+            textBox.Width = this.Width - 20;
         }
     }
 }
