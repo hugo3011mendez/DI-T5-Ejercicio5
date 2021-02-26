@@ -35,6 +35,7 @@ namespace ValidateTextBox
             }
         }
 
+
         private bool correcto = false;
 
         [Category("TextBox")]
@@ -51,13 +52,10 @@ namespace ValidateTextBox
                             int num = Convert.ToInt32(value.Trim());
 
                             correcto = true; // Si los caracteres introducidos son correctos y forman un número entero, el recuadro cambia a verde
-                            this.Refresh();
-                            textBox.Text = value; // Establecemos el valor de la TextBox al indicado
                         }
                         catch (FormatException)
                         {
                             correcto = false;
-                            this.Refresh();
                         }
                         break;
 
@@ -68,13 +66,9 @@ namespace ValidateTextBox
                         // Recorro los caracteres del texto introducido :
                         for (int i = 0; i < value.Length; i++)
                         {
-                            try
+                            if (Char.IsLetter(value[i]) || Char.IsWhiteSpace(value[i]))
                             {
-                                int num = value[i]; // Convierto el caracter en número
-                            }
-                            catch (FormatException)
-                            {
-                                contCorrectos ++;  // Y si salta excepción significa que no es un número, por lo que es un caracter correcto
+                                    contCorrectos++;  // Y si es un caracter correcto, se incrementa el contador
                             }
                         }
 
@@ -82,20 +76,23 @@ namespace ValidateTextBox
                         {
                             // El recuadro se pinta de verde y se establece el nuevo texto del TextBox
                             correcto = true;
-                            this.Refresh();
-                            textBox.Text = value;
                         }
                         else
                         {
                             // El recuadro se pinta de rojo y no se establece el nuevo texto del TextBox
                             correcto = false;
-                            this.Refresh();
                         }
 
                         break;
                 }
 
                 textBox.Text = value;
+                this.Refresh();
+
+                if (textBox.Text == "")
+                {
+                    correcto = false;
+                }
             }
 
             get
@@ -153,12 +150,9 @@ namespace ValidateTextBox
                 lapiz = new Pen(Color.Red, grosor);
             }
 
-            // Dibujo el recuadro al rededor del TextBox
+            // Dibujo el recuadro alrededor del TextBox
             // 10 + 5 porque el ancho del textbox es el ancho del componente -20, por lo que 10 es la mitad y +5 es hasta donde llega el recuadro
-            g.DrawLine(lapiz, 5, 5, textBox.Width + 10 + 5, 5); // Lado superior
-            g.DrawLine(lapiz, 5, 5, 5, textBox.Height + 10 + 5); // Lado izquierdo
-            g.DrawLine(lapiz, 5, textBox.Height + 10 + 5, textBox.Width + 10 + 5, textBox.Height + 10 + 5); // Lado inferior
-            g.DrawLine(lapiz, textBox.Width + 10 + 5, textBox.Height + 10 + 5, textBox.Width + 10 + 5, 5); // Lado derecho
+            g.DrawRectangle(lapiz, 5, 5, textBox.Width + 10, textBox.Height + 10);
         }
 
 
@@ -169,7 +163,9 @@ namespace ValidateTextBox
 
         private void textBox_TextChanged(object sender, EventArgs e)
         {
+            this.Texto = textBox.Text;
             TxtChanged?.Invoke(this, EventArgs.Empty); // Lanzo el evento TxtChanged
+            
         }
     }
 }
